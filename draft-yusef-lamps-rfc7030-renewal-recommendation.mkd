@@ -1,24 +1,23 @@
 ---
-title: Operational Considerations for Manufacturer Authorized Signing Authority
-abbrev: MASA Considerations
-docname: draft-richardson-anima-masa-considerations-00
+title: Certificate Renewal Recommendations for Enrollment over Secure Transport
+abbrev: est-renew
+docname: draft-yusef-lamps-rfc7030-renewal-recommendation-00
 
 # stand_alone: true
 
 ipr: trust200902
 area: Internet
-wg: anima Working Group
+wg: LAMPS Working Group
 kw: Internet-Draft
 cat: std
 
-coding: us-ascii
+coding: utf-8
 pi:    # can use array (if all yes) or hash here
   toc: yes
   sortrefs:   # defaults to yes
   symrefs: yes
 
 author:
-
 - ins: M. Richardson
   name: Michael Richardson
   org: Sandelman Software Works
@@ -26,41 +25,59 @@ author:
 
 normative:
   BCP14: RFC8174
-  I-D.ietf-anima-bootstrapping-keyinfra:
-
-informative:
   RFC7030:
 
+informative:
+  RFC9773:
+
 venue:
-  group: anima
-  mail: anima@ietf.org
-  github: anima-wg/voucher
+  group: lamps
+  mail: spasm@ietf.org
+  github: mcr/rfc7030-renewal-recommendation
 
 --- abstract
 
-This document describes a number of operational modes that a
-BRSKI Manufacturer Authorized Signing Authority (MASA) may take on.
+This document describes an extension to RFC7030, Enrollment over Secure Transport to
+give an indication to a end-entity device when it should start attempting to renew its certificates.
 
-Each mode is defined, and then each mode is given a relevance
-within an over applicability of what kind of organization the
-MASA is deployed into.  This document does not change any
-protocol mechanisms.
+Prior art is that client decides, with a typical recommmendation to start when the remaining lifetime of the certificate is at the 50% point.
+As typical certificate lifetimes are reduced from years to fractions of a year, the 50% may be far too early, and this document provides a way to give alternate advice.
 
 --- middle
 
 # Introduction
 
-How about that {{BCP14}}.
+{{RFC9773, Section 1}} explains why certificate lifetimes and renewal times need more deterministic control in the ACME {{?RFC8555}} ecosystem.
+Similar arguments apply to the {{RFC7030}} ecosystem.
+
+(Do the ecosystems differ in significant ways?  Probably. How much to explain)
+
+Is this as much about client certificates and IoT certificates?
+
+# Terminology
+
+{::boilerplate bcp14-tagged}
+
+# Protocol Details
+
+A new magic header will be returned during RFC7030 certificate enrollment, whether using simpleenroll, or fullcmc.
 
 # Privacy Considerations
 
-YYY
+A very short certificate lifetime renewal time will cause clients to communicate with the EST Registrar more frequently.
+
+EST connections make use of mutually authenticated TLS, when the client certificate being an IDevID, or the last issued certificate, often an LDevID, there is potential to disclose identities during this connection.
+
+When using TLS 1.2, the client certificate details will be revealed.
+TLS 1.3 does not suffer from this problem, and it's use is RECOMMENDED as per {{?I-D.ietf-uta-require-tls13}}
 
 # Security Considerations
 
-ZZZ
+Not sure what yet.
 
 # IANA Considerations
+
+Might need a header allocation
 
 # Acknowledgements
 
