@@ -18,6 +18,11 @@ pi:    # can use array (if all yes) or hash here
   symrefs: yes
 
 author:
+- ins: R. Shekh-Yusef
+  name: Rifaat Shekh-Yusef
+  org: Ciena
+  email: rifaat.s.ietf@gmail.com
+
 - ins: M. Richardson
   name: Michael Richardson
   org: Sandelman Software Works
