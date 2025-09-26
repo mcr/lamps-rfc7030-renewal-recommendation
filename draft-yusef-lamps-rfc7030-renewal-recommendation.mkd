@@ -92,6 +92,40 @@ Should we also support an operation that is not certificate specific, to provide
 
 GET /.well-known/est/renew-info
 
+# Renewal Information Response
+
+The structure the EST RenewalInfo object is as follows:
+
+suggestedWindow (object, required):
+      A JSON object with two keys, "start" and "end", whose values are
+      timestamps, encoded in the format specified in {{RFC3339}}, which
+      bound the window of time in which the CA recommends renewing the
+      certificate.
+
+NOTE: The ACME document includes an explanationURI, which I think is not applicable to this document.
+
+For example:
+
+```
+   HTTP/1.1 200 OK
+   Content-Type: application/json
+   Retry-After: 21600
+
+   {
+     "suggestedWindow": {
+       "start": "2025-01-02T04:00:00Z",
+       "end": "2025-01-03T04:00:00Z"
+     }
+   }
+```
+
+## Base64 Not Used
+
+{{RFC7030}} mistakenly declared that all content would be base64 encoded.
+{{RFC8951}} clarifies that the content is to be base64 encoded, whether or not there is a Content-Transfer-Encoding header present.
+It further clarifies that future extensions (such as this document) will not use base64 encoding.
+The response detailed above is not base64 encoded.
+
 # Privacy Considerations
 
 A very short certificate lifetime renewal time will cause clients to communicate with the EST Registrar more frequently.
