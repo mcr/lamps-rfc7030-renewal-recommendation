@@ -126,6 +126,42 @@ For example:
 It further clarifies that future extensions (such as this document) will not use base64 encoding.
 The response detailed above is not base64 encoded.
 
+# Renewal Operations
+
+Clients MUST attempt renewal at a time of their choosing based on the suggested renewal window, obtained in the previous step.
+
+The following algorithm is RECOMMENDED for choosing a renewal time:
+
+1.  Select a uniform random time within the suggested window.
+
+2.  If the selected time is in the past, attempt renewal immediately.
+
+3.  Otherwise, if the client can schedule itself to attempt renewal
+    at exactly the selected time, do so.
+
+4.  Otherwise, if the selected time is before the next time that the
+    client would wake up normally, attempt renewal immediately.
+
+5.  Otherwise, sleep until the time indicated by the Retry-After
+    header and return to Step 1.
+
+In all cases, renewal attempts are subject to the client's existing error backoff and retry intervals.
+
+   In particular, cron-based clients may find they need to increase their run frequency to
+   check ARI more frequently.  Those clients will need to store information about failures
+   so that increasing their run frequency doesn't lead to retrying failures without proper
+   backoff. Typical information stored should include: number of failures for a given order
+   (defined by the set of identifiers on the order) and time of the most recent failure.
+
+`Is the above highlighted text needed???`
+
+A RenewalInfo object in which the end timestamp equals or precedes the start timestamp is invalid.  Servers MUST NOT serve such a response, and clients MUST treat one as though they failed to receive any response from the server (e.g., retry at an appropriate interval, renew on a fallback schedule, etc.).
+
+# Fetching Schedule
+
+{{RFC9773, Section 4.3}} says:
+
+
 # Privacy Considerations
 
 A very short certificate lifetime renewal time will cause clients to communicate with the EST Registrar more frequently.
