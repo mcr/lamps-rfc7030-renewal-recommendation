@@ -90,7 +90,7 @@ url = /.well-known/est/renewal-info
 Question
 Should we also support an operation that is not certificate specific, to provide a general renewal info, in the absence of a certificate renewal info.
 
-GET /.well-known/est/renew-info
+GET /.well-known/est/renewal-info
 
 # Renewal Information Response
 
