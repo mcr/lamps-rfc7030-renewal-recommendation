@@ -60,10 +60,6 @@ This mechanism enables EST servers to provide suggested detailed renewal operati
 
 The /renewal-info URI is added, as an OPTIONAL operation, to the table in figure 5 in section 3.2.2 of {{RFC7030}}.
 
-(EDIT: Do the ecosystems differ in significant ways?  Probably. How much to explain)
-
-(EDIT: Is this as much about client certificates and IoT certificates?)
-
 # Terminology
 
 {::boilerplate bcp14-tagged}
@@ -92,12 +88,6 @@ url = /.well-known/est/renewal-info
       || base64url(Serial)
 ```
 
-
-(EDIT: Question
-Should we also support an operation that is not certificate specific, to provide a general renewal info, in the absence of a certificate renewal info, such as:
-
-GET /.well-known/est/renewal-info
-)
 
 # Renewal Information Response
 
@@ -152,21 +142,11 @@ The following algorithm is RECOMMENDED for choosing a renewal time:
 
 In all cases, renewal attempts are subject to the client's existing error backoff and retry intervals.
 
-   In particular, cron-based clients may find they need to increase their run
-   frequency to check the renewal-info more frequently.  Those clients will need
-   to store information about failures so that increasing their run frequency
-   doesn't lead to retrying failures without proper
-   backoff.
-   Typical information stored should include: number of failures for a given order
-   (defined by the set of identifiers on the order) and time of the most recent failure.
-
-QUESTION: Is the above highlighted text needed???
-
 A RenewalInfo object in which the end timestamp equals or precedes the start timestamp is invalid.  Servers MUST NOT serve such a response, and clients MUST treat one as though they failed to receive any response from the server (e.g., retry at an appropriate interval, renew on a fallback schedule, etc.).
 
 # Fetching Schedule
 
-{{RFC9773, Section 4.3}} says:
+The advice in {{RFC9773, Section 4.3}} applies:
 
    Clients SHOULD fetch a certificate's RenewalInfo immediately after
    issuance.
@@ -186,7 +166,7 @@ A RenewalInfo object in which the end timestamp equals or precedes the start tim
    instance, after a new certificate for the same identifiers has been
    received and configured).
 
-(EDIT: more? less? And all of these points apply to EST as well.)
+
 
 # Privacy Considerations
 
