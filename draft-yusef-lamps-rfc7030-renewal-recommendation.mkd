@@ -28,6 +28,10 @@ author:
   org: Sandelman Software Works
   email: mcr+ietf@sandelman.ca
 
+- name: Mike Ounsworth
+  org: Entrust Limited
+  email: mike.ounsworth@entrust.com
+
 normative:
   RFC7030:
 
