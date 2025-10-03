@@ -70,9 +70,7 @@ The /renewal-info URI is added, as an OPTIONAL operation, to the table in figure
 
 # Protocol Details
 
-A new magic header will be returned during RFC7030 certificate enrollment, whether using simpleenroll, or fullcmc.
-
-# Renewal Information Request
+## Renewal Information Request
 
 To retrieve the renewal information, the EST client uses the following HTTP request-line:
 
@@ -95,7 +93,7 @@ url = /.well-known/est/renewal-info
 ```
 
 
-# Renewal Information Response
+## Renewal Information Response
 
 The structure the EST RenewalInfo object is as follows:
 
@@ -120,7 +118,7 @@ For example:
    }
 ```
 
-## Base64 Not Used
+### Base64 Not Used
 
 {{RFC7030}} mistakenly declared that all content would be base64 encoded.
 {{!RFC8951}} clarifies that the content is to be base64 encoded, whether or not there is a Content-Transfer-Encoding header present.
@@ -150,7 +148,7 @@ In all cases, renewal attempts are subject to the client's existing error backof
 
 A RenewalInfo object in which the end timestamp equals or precedes the start timestamp is invalid.  Servers MUST NOT serve such a response, and clients MUST treat one as though they failed to receive any response from the server (e.g., retry at an appropriate interval, renew on a fallback schedule, etc.).
 
-# Fetching Schedule
+## Fetching Schedule
 
 The advice in {{RFC9773, Section 4.3}} applies:
 
