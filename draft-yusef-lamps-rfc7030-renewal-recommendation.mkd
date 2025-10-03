@@ -28,6 +28,10 @@ author:
   org: Sandelman Software Works
   email: mcr+ietf@sandelman.ca
 
+- name: Mike Ounsworth
+  org: Entrust Limited
+  email: mike.ounsworth@entrust.com
+
 normative:
   RFC7030:
 
@@ -73,12 +77,14 @@ A new magic header will be returned during RFC7030 certificate enrollment, wheth
 To retrieve the renewal information, the EST client uses the following HTTP request-line:
 
 ```
-GET /.well-known/est/renewal-info/<certificate-id>
+GET /.well-known/est/renewal-info/<certificate-id>;
 ```
 
-The request includes a unique identifier for the certificate in question. The unique identifier is constructed by concatenating the base64url encoding [RFC4648] of the keyIdentifier field of the certificate's Authority Key Identifier (AKI) [RFC5280] extension, the period character ".", and the base64url encoding of the DER-encoded Serial Number field (without the tag and length bytes).  All trailing "=" characters MUST be stripped from both parts of the unique identifier.
+The request includes a unique identifier for the certificate in question.
+The unique identifier is constructed by concatenating the base64url encoding {{!RFC4648}} of the keyIdentifier field of the certificate's Authority Key Identifier (AKI) {{!RFC5280}} extension, the period character ".", and the base64url encoding of the DER-encoded Serial Number field (without the tag and length bytes).
+All trailing "=" characters MUST be stripped from both parts of the unique identifier.
 
-Thus, the full request URL is constructed as follows (split onto multiple lines for readability), where the "||" operator indicates string concatenation:
+Thus, the full request URL is constructed as follows (split onto multiple lines for readability), where the "\|\|" operator indicates string concatenation:
 
 ```
 url = /.well-known/est/renewal-info
@@ -95,7 +101,7 @@ The structure the EST RenewalInfo object is as follows:
 
 suggestedWindow (object, required):
       A JSON object with two keys, "start" and "end", whose values are
-      timestamps, encoded in the format specified in {{RFC3339}}, which
+      timestamps, encoded in the format specified in {{!RFC3339}}, which
       bound the window of time in which the CA recommends renewing the
       certificate.
 
@@ -117,7 +123,7 @@ For example:
 ## Base64 Not Used
 
 {{RFC7030}} mistakenly declared that all content would be base64 encoded.
-{{RFC8951}} clarifies that the content is to be base64 encoded, whether or not there is a Content-Transfer-Encoding header present.
+{{!RFC8951}} clarifies that the content is to be base64 encoded, whether or not there is a Content-Transfer-Encoding header present.
 It further clarifies that future extensions (such as this document) will not use base64 encoding.
 The response detailed above is not base64 encoded.
 
