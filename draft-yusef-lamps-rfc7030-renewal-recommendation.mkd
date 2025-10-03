@@ -189,7 +189,83 @@ Not sure what yet.
 
 # IANA Considerations
 
-Might need a header allocation
+## Updates to EST .well-known registration
+
+To the Well-Known URIs Registry, at:
+"https://www.iana.org/assignments/well-known-uris/well-known-uris.xhtml", this document updates the well-known name "est".
+
+IANA is asked to change the registration of "est" to include RFC7030, RFC9148,
+and this document.
+
+## EST .well-known sub-registry
+
+IANA is requested to create a new Sub-Registry inside of the well-
+known URIs Registry entitled: "EST well-known URIs".
+
+The registry shall have at least five columns:
+
+1. URI Path Component
+2. short-URI Component
+3. CoAP Path abbreviation
+4. description
+5. reference.
+
+The Short-URI components are from {{RFC9148}}.
+The CoAP Path abbreviations are from {{I-D.ietf-core-uri-path-abbrev}}, and are allocated according to the IANA Considerations in that document, which is Specification Required.
+
+New items can be added using the Specification Required process.
+
+The initial contents of this registry shall be:
+
+     URI Path: cacerts
+     short URI Path: crts
+     CoAP Path abbreviation: 301
+     Description: Description of CA certificates
+     Reference: RFC7030 and RFC9148
+
+     URI Path: simpleenroll
+     short URI Path: sen
+     CoAP Path abbreviation: 302
+     Description: Enrollment of Clients
+     Reference: RFC7030 and RFC9148
+
+     URI Path: simplereenroll
+     short URI Path: sren
+     CoAP Path abbreviation: 303
+     Description: Re-enrollment of Clients
+     Reference: RFC7030 and RFC9148
+
+     URI Path: fullcmc
+     short URI Path: none
+     CoAP Path abbreviation: none
+     Description: Full CMC operations
+     Reference: RFC7030
+
+     URI Path: serverkeygen
+     short URI Path: skg
+     CoAP Path abbreviation: 304
+     Description: Server-Side Key Generation
+     Reference: RFC7030 and RFC9148
+
+     URI Path: serverkeygen
+     short URI Path: skc
+     CoAP Path abbreviation: 305
+     Description: Server-Side Key Generation
+     Reference: RFC7030 and RFC9148
+
+     URI Path: csrattrs
+     short URI Path: att
+     CoAP Path abbreviation: 306
+     Description: CSR Attributes Value
+     Reference: RFC7030, RFC9148 and {{I-D.ietf-lamps-csr-attributes}}
+
+     URI Path: renewal-info
+     short URI Path: none
+     CoAP Path abbreviation: 307 (suggested)
+     Description: Renewal information time values
+     Reference: This Document.
+
+
 
 # Acknowledgements
 
