@@ -1,7 +1,7 @@
 ---
 title: Certificate Renewal Recommendations for Enrollment over Secure Transport
 abbrev: est-renew
-docname: draft-yusef-lamps-rfc7030-renewal-recommendation-01
+docname: draft-yusef-lamps-rfc7030-renewal-recommendation-02
 
 # stand_alone: true
 
