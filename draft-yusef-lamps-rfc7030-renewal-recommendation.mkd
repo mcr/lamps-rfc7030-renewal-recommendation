@@ -60,7 +60,7 @@ Similar arguments apply to the {{RFC7030}} ecosystem.
 
 This document extends {{RFC7030}} to add support for renewal information, by adding a new entry to the HTTP URIs for Control list defined in {{RFC7030, Section 3.2.2}}
 
-This mechanism enables EST servers to provide suggested detailed renewal operations to EST clients, and enables clients to inform the EST server that they have successfully renewed and replaced a certificate.
+This mechanism enables EST servers to provide suggested detailed renewal operations to EST clients.
 
 The /renewal-info URI is added, as an OPTIONAL operation, to the table in figure 5 in section 3.2.2 of {{RFC7030}}.
 
