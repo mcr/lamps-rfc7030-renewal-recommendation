@@ -74,9 +74,9 @@ The /renewal-info URI is added, as an OPTIONAL operation, to the table in figure
 
 To retrieve the renewal information, the EST client uses the following HTTP request-line:
 
-```
+~~~~
 GET /.well-known/est/renewal-info/<certificate-id>;
-```
+~~~~
 
 The request includes a unique identifier for the certificate in question.
 The unique identifier is constructed by concatenating the base64url encoding {{!RFC4648}} of the keyIdentifier field of the certificate's Authority Key Identifier (AKI) {{!RFC5280}} extension, the period character ".", and the base64url encoding of the DER-encoded Serial Number field (without the tag and length bytes).
@@ -84,14 +84,13 @@ All trailing "=" characters MUST be stripped from both parts of the unique ident
 
 Thus, the full request URL is constructed as follows (split onto multiple lines for readability), where the "\|\|" operator indicates string concatenation:
 
-```
-url = /.well-known/est/renewal-info
+~~~~
+    url = /.well-known/est/renewal-info
       || '/'
       || base64url(AKI keyIdentifier)
       || '.'
       || base64url(Serial)
-```
-
+~~~~
 
 ## Renewal Information Response
 
@@ -105,18 +104,18 @@ suggestedWindow (object, required):
 
 For example:
 
-```
-   HTTP/1.1 200 OK
-   Content-Type: application/json
-   Retry-After: 21600
+~~~~
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+    Retry-After: 21600
 
-   {
-     "suggestedWindow": {
-       "start": "2025-01-02T04:00:00Z",
-       "end": "2025-01-03T04:00:00Z"
-     }
-   }
-```
+    {
+      "suggestedWindow": {
+        "start": "2025-01-02T04:00:00Z",
+        "end": "2025-01-03T04:00:00Z"
+      }
+    }
+~~~~
 
 ### Base64 Not Used
 
